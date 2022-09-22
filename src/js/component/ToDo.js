@@ -9,7 +9,7 @@ const ToDo = () => {
 	const [todoValue, setTodo ] = useState('');
 	const [todoList, setTodoList ] = useState([]);
 	const [auxlist, setaux] = useState([]);
-
+	
 	
 	
 	const changeList = (e) => {
@@ -65,6 +65,7 @@ const ToDo = () => {
 	useEffect(() =>{
 		if(todoList.length > 0){
 			syncro();
+			obtenerDatos();
 
 		}
 		
@@ -73,8 +74,19 @@ const ToDo = () => {
 	function obtenerDatos(){
 		fetch('https://assets.breatheco.de/apis/fake/todos/user/alesanchezr', {
       method: "GET",
+	  header: {"Content-Type" : "application/json"},
 
 	})
+	}
+
+	function borrarDatos(){
+		fetch('https://assets.breatheco.de/apis/fake/todos/user/alesanchezr', {
+      method: "DELETE",
+	  header: {"Content-Type" : "application/json"},
+
+	})
+
+
 	}
 
 
@@ -88,7 +100,9 @@ const ToDo = () => {
 			{todoList.map((item, index)=><li key={index}>{item}
 			<span onClick={()=>deleteList(index)}> x </span>
 			</li>)}
-			<div>{todoList.length} items left</div> 
+			<div>{todoList.length} items left</div>
+			<button onClick={borrarDatos()}>Delete all</button>
+
 			{console.log(todoList)}
 			
 			
