@@ -8,9 +8,10 @@ const ToDo = () => {
     if (e.key == "Enter") {
       
 		syncro([...todoList, { label: todoValue, done: false }]);
+    e.target.value = "";
       }
      
-      e.target.value = "";
+      
     };
   
   const deleteList = (index) => {
